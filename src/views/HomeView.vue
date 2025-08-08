@@ -1,6 +1,11 @@
+<template>
+  <ToolBar />
+  
+</template>
+
 <script setup lang="ts">
+  import ToolBar from '@/components/ToolBar.vue';
+
 </script>
 
-<template>
-  <h1>HII</h1>
-</template>
+
