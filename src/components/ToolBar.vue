@@ -9,14 +9,20 @@
           @click="collapse = !collapse"
         ></v-btn>
       </template>
-      <v-toolbar-items v-show="!collapse" style="flex: 1;">
-        <v-text-field 
-          label="Enter a search term..." 
-          variant="solo-filled" 
-          density="compact"
-          style="max-width: 400px; margin: 0 auto; padding-top: 1.4em;">
-        </v-text-field>
+      <v-toolbar-items v-show="!collapse" style="flex: 1;justify-content: center; align-items: center; margin-top: 1.5%;">
+        <v-form
+          @submit.prevent="onSearch"
+          style="width: 100%; max-width: 420px; display: flex; flex-direction: row; gap: 8px;">
+          <v-text-field 
+            label="Enter a search term..." 
+            variant="solo-filled" 
+            density="compact"
+            v-model="searchTerm"
+          ></v-text-field>
+          <v-btn type="submit" variant="outlined" style="height: 40px; min-width: 80px;" >Submit</v-btn>
+        </v-form>
       </v-toolbar-items>
+      
     </v-toolbar>
     <v-card-title v-show="collapse">
       <h1>Movie Explorer 3</h1>
@@ -25,10 +31,14 @@
 </template>
 
 <script setup lang="ts">
-import { shallowRef } from 'vue'
+import { ref, shallowRef } from 'vue'
 
   const collapse = shallowRef(false)
+  const searchTerm = ref("")
 
+  const onSearch = () => {
+    console.log("Searching for: ", searchTerm.value)
+  }
 </script>
 
 <style scoped>
