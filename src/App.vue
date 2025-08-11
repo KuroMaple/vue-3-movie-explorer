@@ -1,9 +1,10 @@
 <template>
-  <HomeView />
+  <ToolBar />
+  <RouterView/>
 </template>
 
 <script setup lang="ts">
-import HomeView from './views/HomeView.vue'
+import ToolBar from './components/ToolBar.vue'
 
 
 </script>
