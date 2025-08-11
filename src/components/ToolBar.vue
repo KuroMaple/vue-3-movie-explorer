@@ -9,7 +9,7 @@
           @click="collapse = !collapse"
         ></v-btn>
       </template>
-      <v-toolbar-items v-show="!collapse" style="flex: 1;justify-content: center; align-items: center; margin-top: 1.5%;">
+      <v-toolbar-items v-show="!collapse" style="flex: 1;justify-content: center; align-items: center; margin-top: 1%;">
         <v-form
           @submit.prevent="onSearch"
           style="width: 100%; max-width: 420px; display: flex; flex-direction: row; gap: 8px;">
@@ -18,6 +18,7 @@
             variant="solo-filled" 
             density="compact"
             v-model="searchTerm"
+            :rules="[rules.required]"
           ></v-text-field>
           <v-btn type="submit" variant="outlined" style="height: 40px; min-width: 80px;" >Submit</v-btn>
         </v-form>
@@ -35,8 +36,15 @@ import { ref, shallowRef } from 'vue'
 
   const collapse = shallowRef(false)
   const searchTerm = ref("")
+  const rules = {
+    required:( value: string) => !!value || "Search term is required..." 
+  }
 
   const onSearch = () => {
+    if (!searchTerm.value){
+      console.log("ERROR: need a search value")
+      return
+    }
     console.log("Searching for: ", searchTerm.value)
   }
 </script>
