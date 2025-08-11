@@ -33,17 +33,19 @@
 </template>
 
 <script setup lang="ts">
+import { useMovieStore } from '@/stores/movieStore'
+import { storeToRefs } from 'pinia'
 import { ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
 
   const collapse = shallowRef(true)
-  const searchTerm = ref("")
   const rules = {
     required:( value: string) => !!value || "Search term is required..." 
   }
   const showBlink = ref(true)
   const router = useRouter()
-
+  const movieStore = useMovieStore()
+  const { searchTerm } = storeToRefs(movieStore)
   // Functions
   const onSearch = () => {
     if (!searchTerm.value){
