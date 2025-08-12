@@ -1,5 +1,7 @@
 <template>
-  <v-card>
+  <v-card
+    @click="$emit('select', movie)" style="cursor: pointer;"
+  >
     <v-img :src="movie.Poster" height="300px"></v-img>
     <v-card-title>{{ movie.Title }}</v-card-title>
     <v-card-subtitle>{{ movie.Released }}</v-card-subtitle>

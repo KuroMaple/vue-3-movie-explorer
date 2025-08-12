@@ -7,6 +7,7 @@ export const useMovieStore = defineStore('movie', {
   state: () => ({
     userMovies: [] as Movie[],
     searchResults: [] as Movie[],
+    selectedMovie: null as Movie | null
   }),
   actions: {
     setUserMovies(movies: Movie[]) {
@@ -17,6 +18,16 @@ export const useMovieStore = defineStore('movie', {
     },
     removeUserMovie(movie: Movie) {
       this.userMovies = this.userMovies.filter(m => m.imdbID !== movie.imdbID)
+    },
+    async setSelectedMovie(imdbID: string) {
+      const [movie, error] = await useAsync(MovieService.getMovieDetails(imdbID))
+      if (error) {
+        console.error("Error fetching movie details:", error)
+      } else if (movie) {
+        this.selectedMovie = movie
+      } else {
+        console.log("unknown error occurred while fetching movie details for ", imdbID)
+      }
     },
     async searchMovies(searchTerm: string) {
       const [results, error] = await useAsync(MovieService.searchForMovies(searchTerm))

@@ -24,6 +24,19 @@ const MovieService = {
       console.error("API error:", error);
       return [] // Swallowing API errors
     }
+  },
+  async getMovieDetails(imdbID: string): Promise<Movie | null> {
+    try {
+      const response = await apiClient.get("/", {
+        params: {
+          i: imdbID
+        }
+      })
+      return response.data as Movie;
+    } catch (error) {
+      console.error("API error:", error);
+      return null
+    }
   }
 }
 

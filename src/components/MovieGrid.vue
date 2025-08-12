@@ -7,7 +7,7 @@
       sm="6"
       md="4"
     >
-      <MovieCard :movie="movie" />
+      <MovieCard :movie="movie" @select="goToMovie"/>
       <v-btn
         :class="buttonType === 'add' ? 'add-button' : 'remove-button'"
         class="mt-2"
@@ -23,9 +23,15 @@
 <script setup lang="ts">
 import MovieCard from '@/components/MovieCard.vue'
 import type Movie from '@/types/Movie'
+import { useRouter } from 'vue-router'
 
 defineProps<{ movies: Movie[], buttonType: 'add' | 'remove' }>()
 
+const router = useRouter()
+
+function goToMovie(movie: Movie) {
+  router.push({ name: 'MovieView', params: { imdbID: movie.imdbID } })
+}
 </script>
 <style scoped>
 .add-button {

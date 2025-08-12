@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/search/:query',
       name: 'SearchResults',
       component: () => import('@/views/SearchResults.vue')
+    },
+    {
+      path: '/movie/:imdbID',
+      name: 'MovieView',
+      component: () => import('@/views/MovieView.vue')
     }
   ],
 })
