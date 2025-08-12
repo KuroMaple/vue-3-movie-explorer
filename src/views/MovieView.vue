@@ -6,7 +6,7 @@
       prepend-icon="mdi-arrow-left"
       @click="goBack"
     >
-      Back to Search Results
+      Back
     </v-btn>
     <v-card v-if="selectedMovie">
       <v-row>

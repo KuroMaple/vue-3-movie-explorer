@@ -41,7 +41,10 @@ export const useMovieStore = defineStore('movie', {
     },
   },
   getters: {
-    getSearchResults: (state) => state.searchResults
+    getSearchResults: (state) => state.searchResults,
+    isMovieInUserMovies: (state) => (imdbID: string) =>{
+      return state.userMovies.some(movie => movie.imdbID === imdbID)
+    }
   }
 
 })
