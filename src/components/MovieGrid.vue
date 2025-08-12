@@ -8,6 +8,14 @@
       md="4"
     >
       <MovieCard :movie="movie" />
+      <v-btn
+        :class="buttonType === 'add' ? 'add-button' : 'remove-button'"
+        class="mt-2"
+        block
+        @click="$emit(buttonType, movie)"
+      >
+        {{ buttonType === 'add' ? 'Add to My Movies' : 'Remove from My Movies' }}
+      </v-btn>
     </v-col>
   </v-row>
 </template>
@@ -16,5 +24,17 @@
 import MovieCard from '@/components/MovieCard.vue'
 import type Movie from '@/types/Movie'
 
-defineProps<{ movies: Movie[] }>()
+defineProps<{ movies: Movie[], buttonType: 'add' | 'remove' }>()
+
 </script>
+<style scoped>
+.add-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.remove-button {
+  background-color: #f44336;
+  color: white;
+}
+</style>

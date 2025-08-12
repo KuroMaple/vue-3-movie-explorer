@@ -33,8 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { useMovieStore } from '@/stores/movieStore'
-import { storeToRefs } from 'pinia'
 import { ref, shallowRef } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -44,15 +42,13 @@ import { useRouter } from 'vue-router'
   }
   const showBlink = ref(true)
   const router = useRouter()
-  const movieStore = useMovieStore()
-  const { searchTerm } = storeToRefs(movieStore)
+  const searchTerm = ref('')
   // Functions
   const onSearch = () => {
     if (!searchTerm.value){
       console.log("ERROR: need a search value")
       return
     }
-    console.log("Searching for: ", searchTerm.value)
     router.push({
       name: 'SearchResults', 
       params: {
